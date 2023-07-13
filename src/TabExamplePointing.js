@@ -1,21 +1,48 @@
 import React from 'react'
-import { Tab } from 'semantic-ui-react'
+import { List, Label, Tab } from 'semantic-ui-react'
 
 const panes = [
   {
     menuItem: 'Tab 1',
-    render: () => <Tab.Pane attached={false}>Tab 1 Content</Tab.Pane>,
+    pane: { key: 'tab1', content: 'This is a massive tab', size: 'massive' },
   },
   {
     menuItem: 'Tab 2',
-    render: () => <Tab.Pane attached={false}>Tab 2 Content</Tab.Pane>,
+    pane: {
+      key: 'tab2',
+      content: 'This tab has center-aligned text',
+      textAlign: 'center',
+    },
   },
   {
     menuItem: 'Tab 3',
-    render: () => <Tab.Pane attached={false}>Tab 3 Content</Tab.Pane>,
+    pane: {
+      key: 'tab3',
+      content: (
+        <div>
+          This tab contains a <Label>JSX</Label> element
+        </div>
+      ),
+    },
+  },
+  {
+    menuItem: 'Tab 4',
+    pane: (
+      <Tab.Pane key='tab4'>
+        <p>This tab has complex content</p>
+
+        <List>
+          <List.Item>Apples</List.Item>
+          <List.Item>Pears</List.Item>
+          <List.Item>Oranges</List.Item>
+        </List>
+      </Tab.Pane>
+    ),
   },
 ]
 
-const TabExamplePointing = () => <Tab menu={{ pointing: true }} panes={panes} />
+const TabExampleContentShorthand = () => (
+  <Tab panes={panes} renderActiveOnly={false} />
+)
 
-export default TabExamplePointing
+export default TabExampleContentShorthand
