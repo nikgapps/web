@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Menu, Input, Segment } from 'semantic-ui-react';
+import { Menu as SemanticMenu, Input, Segment } from 'semantic-ui-react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './Home';
 import About from './About';
 import Contact from './Contact';
 
-export default class MenuPointing extends Component {
+export default class Menu extends Component {
   state = { activeItem: 'home' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -16,34 +16,34 @@ export default class MenuPointing extends Component {
     return (
       <Router>
         <div>
-          <Menu pointing>
-            <Menu.Item
+          <SemanticMenu pointing>
+            <SemanticMenu.Item
               name='home'
               active={activeItem === 'home'}
               onClick={this.handleItemClick}
             >
               <Link to="/web">Home</Link>
-            </Menu.Item>
-            <Menu.Item
+            </SemanticMenu.Item>
+            <SemanticMenu.Item
               name='about'
               active={activeItem === 'about'}
               onClick={this.handleItemClick}
             >
               <Link to="/about">About</Link>
-            </Menu.Item>
-            <Menu.Item
+            </SemanticMenu.Item>
+            <SemanticMenu.Item
               name='contact'
               active={activeItem === 'contact'}
               onClick={this.handleItemClick}
             >
               <Link to="/contact">Contact</Link>
-            </Menu.Item>
-            <Menu.Menu position='right'>
-              <Menu.Item>
+            </SemanticMenu.Item>
+            <SemanticMenu.Menu position='right'>
+              <SemanticMenu.Item>
                 <Input icon='search' placeholder='Search...' />
-              </Menu.Item>
-            </Menu.Menu>
-          </Menu>
+              </SemanticMenu.Item>
+            </SemanticMenu.Menu>
+          </SemanticMenu>
 
           <Segment>
             <Routes>

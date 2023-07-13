@@ -1,10 +1,10 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import MenuPointing from './MenuPointing';
+import Menu from './components/Menu';
 
 function App() {
   return (
-    <MenuPointing />
+    <Menu />
   );
 }
 
