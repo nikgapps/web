@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { Menu as SemanticMenu, Input, Segment } from 'semantic-ui-react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import Home from './Home';
 import About from './About';
 import Contact from './Contact';
 
 export default class Menu extends Component {
   state = { activeItem: 'home' }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
     const { activeItem } = this.state
@@ -17,27 +15,9 @@ export default class Menu extends Component {
       <Router>
         <div>
           <SemanticMenu pointing>
-            <SemanticMenu.Item
-              name='home'
-              active={activeItem === 'home'}
-              onClick={this.handleItemClick}
-            >
-              <Link to="/web">Home</Link>
-            </SemanticMenu.Item>
-            <SemanticMenu.Item
-              name='about'
-              active={activeItem === 'about'}
-              onClick={this.handleItemClick}
-            >
-              <Link to="/about">About</Link>
-            </SemanticMenu.Item>
-            <SemanticMenu.Item
-              name='contact'
-              active={activeItem === 'contact'}
-              onClick={this.handleItemClick}
-            >
-              <Link to="/contact">Contact</Link>
-            </SemanticMenu.Item>
+            <MenuItem name='home' activeItem={activeItem} setActiveItem={this.setActiveItem} />
+            <MenuItem name='about' activeItem={activeItem} setActiveItem={this.setActiveItem} />
+            <MenuItem name='contact' activeItem={activeItem} setActiveItem={this.setActiveItem} />
             <SemanticMenu.Menu position='right'>
               <SemanticMenu.Item>
                 <Input icon='search' placeholder='Search...' />
@@ -47,7 +27,7 @@ export default class Menu extends Component {
 
           <Segment>
             <Routes>
-              <Route path="/web" element={<Home />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
@@ -56,4 +36,25 @@ export default class Menu extends Component {
       </Router>
     )
   }
+
+  setActiveItem = (itemName) => {
+    this.setState({ activeItem: itemName });
+  }
+}
+
+function MenuItem({ name, activeItem, setActiveItem }) {
+  let navigate = useNavigate();
+
+  function handleItemClick() {
+    setActiveItem(name);
+    navigate('/' + name);
+  }
+
+  return (
+    <SemanticMenu.Item
+      name={name}
+      active={activeItem === name}
+      onClick={handleItemClick}
+    />
+  )
 }
